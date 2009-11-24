@@ -2,15 +2,17 @@ import sys
 import shutil
 import os
 
-def getpostgresqlenv(options,buildout):
-    os.environ['EXTRA_LDAP_LIBS'] = os.environ['LDFLAGS']
-    
+
     
 def getpostgresqlenv(options,buildout):
     os.environ['EXTRA_LDAP_LIBS'] = os.environ['LDFLAGS']
-    
+
+def q(o, b):
+    if 'win' in sys.platform:
+        import pdb;pdb.set_trace()    
 def p(o, b):
     if 'win' in sys.platform:
+        #import pdb;pdb.set_trace()
         dest = o['location']
         lib = os.path.join(dest, 'lib')
         bin = os.path.join(dest, 'bin')
