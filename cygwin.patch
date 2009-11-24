@@ -1,0 +1,149 @@
+Only in postgresql-8.4.1.new: .configure.swp
+diff -ur postgresql-8.4.1/configure postgresql-8.4.1.new/configure
+--- postgresql-8.4.1/configure	2009-09-04 02:36:49.000000000 +0200
++++ postgresql-8.4.1.new/configure	2009-11-24 19:06:58.546875000 +0100
+@@ -30,6 +30,10 @@
+ 
+ fi
+ 
++minitage_CC=$CC
++if [ -z $CC ] ;then
++    minitage_CC=gcc
++fi
+ 
+ 
+ 
+@@ -1863,7 +1867,8 @@
+ 
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
++
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+@@ -3004,6 +3009,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ if test -n "$ac_tool_prefix"; then
+@@ -3721,6 +3727,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+@@ -3820,6 +3827,10 @@
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ 
+ 
++minitage_CFLAGS="$CFLAGS"
++minitage_CPPFLAGS="$CPPFLAGS"
++minitage_CXXFLAGS="$CXXFLAGS"
++minitage_LDFLAGS="$LDFLAGS"
+ 
+ unset CFLAGS
+ 
+@@ -3827,6 +3838,19 @@
+ # Read the template
+ #
+ . "$srcdir/src/template/$template" || exit
++echo
++echo Reset minitage_CFLAGS="$CFLAGS"
++echo Reset minitage_CPPFLAGS="$CPPFLAGS"
++echo Reset minitage_CXXFLAGS="$CXXFLAGS"
++echo Reset minitage_LDFLAGS="$LDFLAGS"
++echo
++CFLAGS="$minitage_CFLAGS"
++CPPFLAGS="$minitage_CPPFLAGS"
++CXXFLAGS="$minitage_CXXFLAGS"
++LDFLAGS="$minitage_LDFLAGS"
++export CFLAGS LDFLAGS CXXFLAGS CPPFLAGS
++
++
+ 
+ # CFLAGS are selected so:
+ # If the user specifies something in the environment, that is used.
+@@ -4352,6 +4376,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ { echo "$as_me:$LINENO: checking how to run the C preprocessor" >&5
+@@ -4576,6 +4601,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+@@ -9800,6 +9826,19 @@
+ 
+ 
+ if expr x"$pgac_cv_check_readline" : 'x-lreadline' >/dev/null ; then
++echo
++echo LDFLAGS were: $LDFLAGS
++echo
++echo
++echo CFLAGS were: $CFLAGS
++LDFLAGS=$minitage_LDFLAGS
++CFLAGS=$minitage_CFLAGS
++CPPFLAGS=$minitage_CPPFLAGS
++export LDFLAGS CFLAGS CPPFLAGS
++echo
++echo
++echo CC is: $CC
++echo
+ 
+ for ac_header in readline/readline.h
+ do
+@@ -9826,7 +9865,16 @@
+ $ac_includes_default
+ #include <$ac_header>
+ _ACEOF
++
++
++
+ rm -f conftest.$ac_objext
++
++
++# minitage debug: echo ac_try=$ac_try
++# minitage debug: echo ac_compile=$ac_compile
++# minitage debug: echo $ac_compile
++
+ if { (ac_try="$ac_compile"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -9835,6 +9883,7 @@
+ eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+   (eval "$ac_compile") 2>conftest.er1
+   ac_status=$?
++
+   grep -v '^ *+' conftest.er1 >conftest.err
+   rm -f conftest.er1
+   cat conftest.err >&5
+@@ -19512,6 +19561,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+@@ -19993,6 +20043,7 @@
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_compile="$minitage_CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5"
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
