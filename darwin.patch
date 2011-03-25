@@ -1,0 +1,12 @@
+diff -ur a/src/pl/plpython/Makefile b/src/pl/plpython/Makefile
+--- a/src/pl/plpython/Makefile	2011-03-25 02:09:15.000000000 +0100
++++ b/src/pl/plpython/Makefile	2011-03-25 02:10:26.000000000 +0100
+@@ -24,7 +24,7 @@
+ # Darwin (OS X) has its own ideas about how to do this.
+ ifeq ($(PORTNAME), darwin)
+ shared_libpython = yes
+-override python_libspec = -framework Python
++override python_libspec = -framework Python -lpython
+ override python_additional_libs =
+ endif
+ 
