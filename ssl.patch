@@ -1,12 +1,12 @@
-diff -ur postgresql-8.3.7/src/Makefile.shlib postgresql-8.3.7.new/src/Makefile.shlib
---- postgresql-8.3.7/src/Makefile.shlib	2007-02-20 23:45:57.000000000 +0100
-+++ postgresql-8.3.7.new/src/Makefile.shlib	2009-07-22 15:11:40.000000000 +0200
-@@ -74,7 +74,7 @@
- ifeq ($(enable_shared), yes)
+diff -uNr postgresql-9.1.4/src/Makefile.shlib postgresql-9.1.4.new/src/Makefile.shlib
+--- postgresql-9.1.4/src/Makefile.shlib	2012-06-01 01:07:09.000000000 +0200
++++ postgresql-9.1.4.new/src/Makefile.shlib	2012-07-03 12:18:19.731276536 +0200
+@@ -99,7 +99,7 @@
  
- # Insert -L from LDFLAGS after any -L already present in SHLIB_LINK
--SHLIB_LINK := $(filter -L%, $(SHLIB_LINK)) $(filter -L%, $(LDFLAGS)) $(filter-out -L%, $(SHLIB_LINK))
-+SHLIB_LINK := $(filter -L%, $(SHLIB_LINK)) $(filter -L%, $(LDFLAGS)) $(filter-out -L%, $(SHLIB_LINK)) $(MINITAGE_SSL)
+ ifndef soname
+ # additional flags for backend modules
+-SHLIB_LINK += $(BE_DLLLIBS)
++SHLIB_LINK += $(BE_DLLLIBS) $(MINITAGE_SSL) 
+ endif
  
- # Need a -L-free version of LDFLAGS to use in combination with SHLIB_LINK
- LDFLAGS_NO_L = $(filter-out -L%, $(LDFLAGS))
+ # For each platform we support shared libraries on, set shlib to the
