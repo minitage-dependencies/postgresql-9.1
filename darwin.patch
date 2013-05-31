@@ -1,12 +1,12 @@
-diff -ur a/src/pl/plpython/Makefile b/src/pl/plpython/Makefile
---- a/src/pl/plpython/Makefile	2011-03-25 02:09:15.000000000 +0100
-+++ b/src/pl/plpython/Makefile	2011-03-25 02:10:26.000000000 +0100
+diff -Nur postgresql-9.1.9/src/pl/plpython/Makefile postgresql-9.1.9.n/src/pl/plpython/Makefile
+--- postgresql-9.1.9/src/pl/plpython/Makefile	2013-04-01 20:23:05.000000000 +0200
++++ postgresql-9.1.9.n/src/pl/plpython/Makefile	2013-05-31 23:35:46.000000000 +0200
 @@ -24,7 +24,7 @@
  # Darwin (OS X) has its own ideas about how to do this.
  ifeq ($(PORTNAME), darwin)
  shared_libpython = yes
 -override python_libspec = -framework Python
-+override python_libspec = -framework Python -lpython
++override python_libspec = -lpython2.7
  override python_additional_libs =
  endif
  
